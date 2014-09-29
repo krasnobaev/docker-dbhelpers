@@ -77,5 +77,4 @@ To-Do list
 
 - expand makefile
 - add sedna helpers support
-- change phpMyAdmin config password
 
