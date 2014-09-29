@@ -29,6 +29,14 @@ ADD ./sites-available/0082-dumper.conf /etc/apache2/sites-available/0082-dumper.
 ADD ./sites-enabled/0082-dumper.conf /etc/apache2/sites-enabled/0082-dumper.conf
 EXPOSE 82
 
+# phpPgAdmin setup
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install phppgadmin
+ADD ./sites-available/0083-phppgadmin.conf /etc/apache2/sites-available/0083-phppgadmin.conf
+ADD ./sites-enabled/0083-phppgadmin.conf /etc/apache2/sites-enabled/0083-phppgadmin.conf
+RUN sed -i "s/extra_login_security'\] = true/extra_login_security'] = false/" /etc/phppgadmin/config.inc.php
+EXPOSE 83
+
 ADD ./run.sh /run.sh
 RUN chmod 755 /*.sh
 CMD ["/run.sh"]
