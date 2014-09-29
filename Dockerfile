@@ -1,10 +1,9 @@
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 MAINTAINER Aleksey Krasnobaev <alekseykrasnobaev@gmail.com>
 
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install apache2 \
 	libapache2-mod-php5 php5-mysql
-ADD ./ports.conf /etc/apache2/ports.conf
 EXPOSE 80
 
 # phpMyAdmin setup
@@ -14,9 +13,7 @@ ADD ./sites-enabled/0081-phpmyadmin.conf /etc/apache2/sites-enabled/0081-phpmyad
 RUN chmod 777 /var/lib/phpmyadmin/config.inc.php
 ADD ./config.inc.php /etc/phpmyadmin/
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install pwgen;                \
-	sed -i "s/SECRET/$(pwgen -B -s 24 1)/g" /etc/phpmyadmin/config.inc.php; \
-	DEBIAN_FRONTEND=noninteractive apt-get -y install apache2-utils;        \
-	htpasswd -bc /etc/phpmyadmin/htpasswd.setup admin qwerty;
+	sed -i "s/SECRET/$(pwgen -B -s 24 1)/g" /etc/phpmyadmin/config.inc.php;
 EXPOSE 81
 
 # dumper setup
@@ -36,6 +33,9 @@ ADD ./sites-available/0083-phppgadmin.conf /etc/apache2/sites-available/0083-php
 ADD ./sites-enabled/0083-phppgadmin.conf /etc/apache2/sites-enabled/0083-phppgadmin.conf
 RUN sed -i "s/extra_login_security'\] = true/extra_login_security'] = false/" /etc/phppgadmin/config.inc.php
 EXPOSE 83
+
+# list open apache ports here
+ADD ./ports.conf /etc/apache2/ports.conf
 
 ADD ./run.sh /run.sh
 RUN chmod 755 /*.sh
