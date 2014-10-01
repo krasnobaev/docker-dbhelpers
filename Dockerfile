@@ -40,5 +40,4 @@ ADD ./ports.conf /etc/apache2/ports.conf
 
 ADD ./run.sh /run.sh
 RUN chmod 755 /*.sh
-CMD /run.sh localhost
 
