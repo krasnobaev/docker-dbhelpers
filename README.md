@@ -86,7 +86,7 @@ which means
 docker run -d --name dbhelpers                            \
     --link some-mysql:mysql --link some-postgres:postgres \
     -v $DUMPERBACKUPFOLDER:/usr/share/dumper/backup       \
-    -p 80:80 -p 50001:81 -p 50002:82 -p 50003:83          \
+    -p 80:80 -p 81:81 -p 82:82 -p 83:83                   \
     krasnobaev/dbhelpers
 ```
 
