@@ -16,8 +16,7 @@ ENV insert \tAllowOverride All
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install pwgen;        \
 	sed -i "s/BLOWSECRET/$(pwgen -B -s 24 1)/g" /etc/phpmyadmin/config.inc.php;\
 	sed -i "s/$match/$match\n$insert/" /etc/phpmyadmin/apache.conf; \
-	sed -i "s/80/81/" /etc/phpmyadmin/phpmyadmin.service;           \
-	chmod 777 /var/lib/php5
+	sed -i "s/80/81/" /etc/phpmyadmin/phpmyadmin.service;
 ADD ./sites-available/0081-phpmyadmin.conf /etc/apache2/sites-available/0081-phpmyadmin.conf
 ADD ./sites-enabled/0081-phpmyadmin.conf /etc/apache2/sites-enabled/0081-phpmyadmin.conf
 

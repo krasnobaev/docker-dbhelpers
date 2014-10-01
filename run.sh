@@ -19,6 +19,8 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048                      \
 	-keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt \
 		-subj "/C=RU/ST=Moscow/L=Moscow/O=Stankin/OU=UITS/CN=$1"
 
+chmod 777 /var/lib/php5
+
 source /etc/apache2/envvars
 exec apache2 -D FOREGROUND
 
