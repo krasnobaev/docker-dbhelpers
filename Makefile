@@ -7,6 +7,7 @@ run:
 		-v $(DUMPERBACKUPFOLDER):/usr/share/dumper/backup     \
 		-v $(WWWHOMEINDEX):/var/www/html/index.html           \
 		-p 80:80 -p 50001:81 -p 50002:82 -p 50003:83          \
+		-p 811:811 -p 812:812 -p 813:813                      \
 		krasnobaev/dbhelpers
 
 runwithoutwwwhome:

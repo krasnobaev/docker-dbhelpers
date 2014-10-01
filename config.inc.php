@@ -16,7 +16,9 @@ $cfg['Servers'][$i]['password'] = 'MYSQL_ENV_MYSQL_ROOT_PASSWORD';
 
 /* End of servers configuration */
 
-$cfg['blowfish_secret'] = 'SECRET';
+$cfg['blowfish_secret'] = 'BLOWSECRET';
 $cfg['ServerDefault'] = 1;
+$cfg['ForceSSL'] = true;
+$cfg['PmaAbsoluteUri'] = 'https://SERVER_NAME:811/';
 ?>
 

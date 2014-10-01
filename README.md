@@ -40,8 +40,41 @@ where `make build` means
 docker build -t krasnobaev/dbhelpers .
 ```
 
+Prerequisites
+-------------
+
+mysql setup:
+```bash
+export MYSQL_ROOT_PASS=mysecretpassword
+docker run -d --name some-mysql -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASS mysql
+```
+
+to check mysql root password:
+```bash
+docker run -it --rm --link some-mysql:mysql busybox printenv MYSQL_ENV_MYSQL_ROOT_PASSWORD
+```
+
+postgresql setup:
+```bash
+docker run -d --name some-postgres postgres
+```
+
+then you need to change default password:
+```bash
+docker run -it --rm --link some-postgres:postgres postgres sh -c 'exec psql -Upostgres -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT"'
+\password postgres
+
+\q
+```
+
 Run image
 ---------
+
+System-wide setup
+```bash
+mkdir -p /var/dumper
+echo export DUMPERBACKUPFOLDER=/var/dumper >> /etc/profile
+```
 
 ```bash
 sudo -E make run
