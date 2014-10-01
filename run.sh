@@ -13,6 +13,8 @@ sed -i "s/'host'] = .*/'host'] = '$POSTGRES_PORT_5432_TCP_ADDR';/" /etc/phppgadm
 sed -i "s/SERVER_NAME/$1/" /etc/apache2/sites-{available,enabled}/008{1-phpmyadmin,2-dumper,3-phppgadmin}.conf
 sed -i "s/SERVER_NAME/$1/" /etc/phpmyadmin/config.inc.php
 
+sed -i "s/SERVER_NAME/$1/" /var/www/html/index.html
+
 openssl req -x509 -nodes -days 365 -newkey rsa:2048                      \
 	-keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt \
 		-subj "/C=RU/ST=Moscow/L=Moscow/O=Stankin/OU=UITS/CN=$1"

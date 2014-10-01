@@ -20,7 +20,7 @@ In order to backup with dumper in your local directory (not container folder)
 you should set `$DUMPERBACKUPFOLDER` environment variable which holds path to
 your local directory.
 
-If you want set custom apache homepache you should set `$WWWHOMEINDEX`
+If you want set custom apache homepache you should set `$OWNHOMEPAGE`
 environment variable.
 
 Building the base image
@@ -86,14 +86,13 @@ which means
 docker run -d --name dbhelpers                            \
     --link some-mysql:mysql --link some-postgres:postgres \
     -v $DUMPERBACKUPFOLDER:/usr/share/dumper/backup       \
-    -v $WWWHOMEINDEX:/var/www/html/index.html             \
     -p 80:80 -p 50001:81 -p 50002:82 -p 50003:83          \
     krasnobaev/dbhelpers
 ```
 
 also available commands:
 ```bash
-sudo -E make runwithoutwwwhome
+sudo -E make runwithownhomepage
 sudo make runbash
 ```
 
