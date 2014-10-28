@@ -18,8 +18,17 @@ runownhomepage:
 		-p 811:811 -p 812:812 -p 813:813                      \
 		krasnobaev/dbhelpers sh -c '/run.sh $(shell uname -n)'
 
+runwww:
+	docker run -d --name dbhelpers                            \
+		-v $(OWNHOME):/var/www/html/ -p 80:80                 \
+		krasnobaev/dbhelpers sh -c '/run.sh $(shell uname -n)'
+
 runbash:
 	docker run -it --rm --name dbhelpers                      \
 		--link some-mysql:mysql --link some-postgres:postgres \
 		krasnobaev/dbhelpers /bin/bash
+
+stop:
+	docker stop dbhelpers
+	docker rm dbhelpers
 
